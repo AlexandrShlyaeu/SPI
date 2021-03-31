@@ -1,0 +1,6 @@
+alias SPI_up="docker-compose -f ~/SPI/docker-compose.yml up -d"
+alias SPI_down="docker-compose -f ~/SPI/docker-compose.yml down"
+alias SPI_start="docker-compose -f ~/SPI/docker-compose.yml start"
+alias SPI_stop="docker-compose -f ~/SPI/docker-compose.yml stop"
+alias SPI_update="docker-compose -f ~/SPI/docker-compose.yml pull"
+alias SPI_build="docker-compose -f ~/SPI/docker-compose.yml build"

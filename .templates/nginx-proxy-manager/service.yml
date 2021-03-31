@@ -1,0 +1,31 @@
+nginx-proxy-manager:
+  image: "jc21/nginx-proxy-manager:latest"
+  container_name: nginx-proxy-manager
+  ports:
+    - "880:80"
+    - "81:81"
+    - "843:443"
+  environment:
+    DB_MYSQL_HOST: "db"
+    DB_MYSQL_PORT: 3306
+    DB_MYSQL_USER: "npm"
+    DB_MYSQL_PASSWORD: "npm"
+    DB_MYSQL_NAME: "npm"
+  volumes:
+    - ./config/config.json:/app/config/production.json
+    - ./config/nginx-proxy-manager:/data
+    - ./config/letsencrypt:/etc/letsencrypt
+  restart: unless-stopped
+  depends_on:
+    - mariadb
+mariadb:
+  image: "yobasystems/alpine-mariadb:latest"
+  container_name: mariadb
+  environment:
+    MYSQL_ROOT_PASSWORD: "npm"
+    MYSQL_DATABASE: "npm"
+    MYSQL_USER: "npm"
+    MYSQL_PASSWORD: "npm"
+  volumes:
+    - ./config/mysql:/var/lib/mysql
+  restart: unless-stopped

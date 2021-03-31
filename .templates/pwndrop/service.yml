@@ -1,0 +1,13 @@
+pwndrop:
+  image: linuxserver/pwndrop
+  container_name: pwndrop
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/Minsk
+    - SECRET_PATH=/pwndrop #optional
+  volumes:
+    - /config/pwndrop:/config
+  ports:
+    - 8123:8080
+  restart: unless-stopped

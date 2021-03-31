@@ -1,0 +1,20 @@
+doublecommander:
+  image: linuxserver/doublecommander
+  container_name: doublecommander
+  # network_mode: host
+  environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Europe/Minsk
+    - UMASK_SET=022 #optional
+    - DELUGE_LOGLEVEL=error #optional
+  volumes:
+    - ./config/doublecommander:/config
+    - ./config:/configs
+    - ./downloads:/downloads
+    - ./media:/media
+  ports:
+    - 8112:8112
+    - 58846:58846
+    - 58946:58946
+  restart: unless-stopped
