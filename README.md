@@ -10,35 +10,33 @@ This repository will allow you to dynamically choose needed containers and autom
 <b>What is currently a part of the SPI Stack:</b>
 
 <ul>
-  <li>Portainer - GUI Docker Manager :9000</li>
-  <li> Sonarr : 8989</li>
-  <li> Radarr : 7878</li>
-  <li> Lidarr : 8686</li>
   <li> Bazarr : 6767</li>
-  <li> Jackett : 9117</li>
+  <li> Bitwardenrs : 8100</li>
   <li> Deluge - Torrent Client : 8112</li>
-  <li> qBittorrent - Torrent Client : 15080</li>
-  <li> Transmission - Torrent Client : 9091</li>
-  <li> NZBGet - Usenet groups client : 6789</li>
-  <li> SABnzbd - Usenet groups client : 8080</li>
-  <li> JellyFin - Media manager OpenSource : <b>8096</b></li>
+  <li> Doublecommander : 8112</li>
   <li> Emby - Media manager like Plex : <b>8096</b></li>
-  <li> Plex - Media manager : 32400/web</li>
   <li> EmbyStat - Statistics for Emby : 6555</li>
-  <li> TVheadend - TV streaming server : 9981 </li>
+  <li> Heimdall : 83</li>
+  <li> Jackett : 9117</li>
+  <li> JellyFin - Media manager OpenSource : <b>8096</b></li>
+  <li> Lidarr : 8686</li>
+  <li> NZBGet - Usenet groups client : 6789</li>
+  <li> Nginx-proxy-manager : 81</li>
   <li> Ngnix - Web Server - for future use clear instance for now: 80</li>
   <li> Pi-Hole - Private DNS sinkhole : 8089 <b>WebPass: <i>greenfrog</i></b></li>
+  <li> Plex - Media manager : 32400/web</li>
+  <li> Portainer - GUI Docker Manager :9000</li>
+  <li> Pwndrop : 8123</li>
+  <li> Radarr : 7878</li>
+  <li> SABnzbd - Usenet groups client : 8080</li>
+  <li> Sonarr : 8989</li>
+  <li> TVheadend - TV streaming server : 9981 </li>
+  <li> Torrserver : 9080</li>
+  <li> Transmission - Torrent Client : 9091</li>
+  <li> qBittorrent - Torrent Client : 15080</li>
   </ul>
 <br>
 <i>Numbers after ":" identify a port that particular container will respond on, i.e. Portainer default port is :9000, point your browser it to your server IP adding :9000 at the end i.e. http://192.168.100.100:9000 you will see Portainer login page.</i>
-
-### Raspberry Pi SPI Server Docker Edition
-
-YouTube: <https://youtu.be/oLxsSQIqOMw>
-
-### GreenFrog Small Blog
-
-Blog link: <http://greenfrognest.com/SPIondocker.php>
 
 ## How to Use it?
 
@@ -51,7 +49,7 @@ Static IP address is not absolutely necessary just to try the project and find o
 
 - Clone the repository with:
 
-<pre><code>git clone https://github.com/GreenFrogSB/SPI.git ~/SPI</code></pre>
+<pre><code>git clone https://github.com/AlexandrShlyaeu/SPI.git ~/SPI</code></pre>
 
 <i>Do not change name of the folder on your local system it should stay as is for the script to work properly</i>
 
