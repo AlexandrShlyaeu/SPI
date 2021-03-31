@@ -85,7 +85,7 @@ docker_setfacl() {
 	[ $(getfacl ./config | grep -c "default:user:$USER") -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx ./config
 	[ $(getfacl ./SPIBackups | grep -c "default:user:$USER") -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx ./SPIBackups
 
-	cp .templates/nginx-proxy-manager/config.json ./config/config.json
+	cp ./.templates/nginx-proxy-manager/npm-config.json ./config/npm-config.json
 
 
 }
@@ -194,6 +194,8 @@ fi
 mainmenu_selection=$(whiptail --title "Main Menu" --menu --notags \
 	"" 20 78 12 -- \
 	"install" "Install Docker" \
+	"samba" "Share folders" \
+	"staticIP" "Statick ip" \
 	"build" "Build SPI Stack" \
 	"commands" "Docker commands" \
 	"misc" "Miscellaneous commands" \
@@ -304,6 +306,45 @@ case $mainmenu_selection in
 	else
 
 		echo "Build cancelled"
+
+	fi
+	;;
+	#MAINMENU Samba ------------------------------------------------------------
+"samba")
+		echo "Updating system"
+		sudo apt-get update
+		sudo apt-get upgrade
+
+		echo "Installing samba and samba-common-bin"
+		sudo apt-get install samba samba-common-bin
+
+		echo "sharing folder"
+		./scripts/samba.sh
+
+		echo "restarting samba"
+		sudo systemctl restart smbd
+
+		echo "Checking IP "
+		hostname -I
+
+		echo "shared folders successfully"
+
+	fi
+	;;
+	#MAINMENU Static IP ------------------------------------------------------------
+"staticIP")
+		echo "running script"
+		./scripts/static.sh
+
+		echo "restarting network"
+		sudo systemctl restart ifup@enp0s3
+
+		echo "Checking"
+		ifconfig | true
+		ip addr | true
+		ip a s enp0s3| true
+
+		echo "finished successfully"
 
 	fi
 	;;

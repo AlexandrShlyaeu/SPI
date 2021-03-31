@@ -12,7 +12,7 @@ nginx-proxy-manager:
     DB_MYSQL_PASSWORD: "npm"
     DB_MYSQL_NAME: "npm"
   volumes:
-    - ./config/config.json:/app/config/production.json
+    - ./config/npm-config.json:/app/config/production.json
     - ./config/nginx-proxy-manager:/data
     - ./config/letsencrypt:/etc/letsencrypt
   restart: unless-stopped

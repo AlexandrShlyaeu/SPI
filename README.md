@@ -23,7 +23,7 @@ This repository will allow you to dynamically choose needed containers and autom
   <li> NZBGet - Usenet groups client : 6789</li>
   <li> Nginx-proxy-manager : 81</li>
   <li> Ngnix - Web Server - for future use clear instance for now: 80</li>
-  <li> Pi-Hole - Private DNS sinkhole : 8089 <b>WebPass: <i>greenfrog</i></b></li>
+  <li> Pi-Hole - Private DNS sinkhole : 8089 <b>WebPass: <i>pi</i></b></li>
   <li> Plex - Media manager : 32400/web</li>
   <li> Portainer - GUI Docker Manager :9000</li>
   <li> Pwndrop : 8123</li>
