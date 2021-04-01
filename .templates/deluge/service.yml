@@ -9,8 +9,8 @@ deluge:
     - UMASK_SET=022 #optional
     - DELUGE_LOGLEVEL=error #optional
   volumes:
-    - ./config/deluge:/config
-    - ./downloads:/downloads
+    - /storage/config/deluge:/config
+    - /storage/downloads:/downloads
   ports:
     - 8112:8112
     - 58846:58846

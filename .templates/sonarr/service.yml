@@ -7,9 +7,9 @@ sonarr:
     - TZ=Europe/Minsk
     - UMASK_SET=022 #optional
   volumes:
-    - ./config/sonarr:/config
-    - ./media/tvshows:/tv
-    - ./downloads:/downloads
+    - /storage/config/sonarr:/config
+    - /storage/media/tvshows:/tv
+    - /storage/downloads:/downloads
   ports:
     - 8989:8989
   restart: unless-stopped

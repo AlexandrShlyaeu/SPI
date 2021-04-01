@@ -6,6 +6,6 @@ embystat:
     - PGID=1000
     - TZ=Europe/Minsk
   volumes:
-    - ./config/embystat:/config
+    - /storage/config/embystat:/config
   ports:
     - 6555:6555

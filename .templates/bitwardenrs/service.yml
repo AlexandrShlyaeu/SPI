@@ -7,7 +7,7 @@ bitwardenrs:
     - TZ=Europe/Minsk
     - UMASK_SET=022 #optional
   volumes:
-    - ./config/bitwardenrs:/data/
+    - /storage/config/bitwardenrs:/data/
   ports:
     - 8100:80
   restart: unless-stopped

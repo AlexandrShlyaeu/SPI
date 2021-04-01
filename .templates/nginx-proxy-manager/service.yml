@@ -12,9 +12,9 @@ nginx-proxy-manager:
     DB_MYSQL_PASSWORD: "npm"
     DB_MYSQL_NAME: "npm"
   volumes:
-    - ./config/npm-config.json:/app/config/production.json
-    - ./config/nginx-proxy-manager:/data
-    - ./config/letsencrypt:/etc/letsencrypt
+    - /storage/config/npm-config.json:/app/config/production.json
+    - /storage/config/nginx-proxy-manager:/data
+    - /storage/config/letsencrypt:/etc/letsencrypt
   restart: unless-stopped
   depends_on:
     - mariadb
@@ -27,5 +27,5 @@ mariadb:
     MYSQL_USER: "npm"
     MYSQL_PASSWORD: "npm"
   volumes:
-    - ./config/mysql:/var/lib/mysql
+    - /storage/config/mysql:/var/lib/mysql
   restart: unless-stopped

@@ -6,8 +6,8 @@ nzbget:
     - PGID=1000
     - TZ=Europe/Minsk
   volumes:
-    - ./config/nzbget:/config
-    - ./downloads:/downloads
+    - /storage/config/nzbget:/config
+    - /storage/downloads:/downloads
   ports:
     - 6789:6789
   restart: unless-stopped

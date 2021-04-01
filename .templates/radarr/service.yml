@@ -7,9 +7,9 @@ radarr:
     - TZ=Europe/Minsk
     - UMASK_SET=022 #optional
   volumes:
-    - ./config/radarr:/config
-    - ./media/movies:/movies
-    - ./downloads:/downloads
+    - /storage/config/radarr:/config
+    - /storage/media/movies:/movies
+    - /storage/downloads:/downloads
   ports:
     - 7878:7878
   restart: unless-stopped

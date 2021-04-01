@@ -8,8 +8,8 @@ jackett:
     - AUTO_UPDATE=true #optional
     # - RUN_OPTS=<run options here> #optional
   volumes:
-    - ./config/jackett:/config
-    - ./downloads:/downloads
+    - /storage/config/jackett:/config
+    - /storage/downloads:/downloads
   ports:
     - 9117:9117
   restart: unless-stopped

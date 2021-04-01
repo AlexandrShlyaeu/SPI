@@ -56,7 +56,7 @@ Static IP address is not absolutely necessary just to try the project and find o
 - Enter the directory and run:
 
 <pre><code>cd ~/SPI</code></pre>
-<pre><code>./deploy.sh</code></pre>
+<pre><code>/storage/deploy.sh</code></pre>
 
 ## Menu
 
@@ -80,4 +80,4 @@ Static IP address is not absolutely necessary just to try the project and find o
 
 ### Update SPI Stack
 
-<p>Each time you run <code>./deploy.sh</code> script will check GitHub repository for any updates and download them if available. You can also manually check for update using this option without running <code>./deploy.sh</code> script. Updates will not modify your configuration or any private files except the ones that are part of the SPI logic. Some new functions might be added or new containers etc.</p>
+<p>Each time you run <code>/storage/deploy.sh</code> script will check GitHub repository for any updates and download them if available. You can also manually check for update using this option without running <code>/storage/deploy.sh</code> script. Updates will not modify your configuration or any private files except the ones that are part of the SPI logic. Some new functions might be added or new containers etc.</p>

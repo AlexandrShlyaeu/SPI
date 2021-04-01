@@ -7,8 +7,8 @@ lidarr:
     - TZ=Europe/Minsk
     - UMASK_SET=022 #optional
   volumes:
-    - ./config/lidarr:/config
-    - ./media/music:/music
-    - ./downloads:/downloads
+    - /storage/config/lidarr:/config
+    - /storage/media/music:/music
+    - /storage/downloads:/downloads
   ports:
     - 8686:8686

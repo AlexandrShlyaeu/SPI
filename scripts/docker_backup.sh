@@ -2,55 +2,55 @@
 
 # pushd ~/SPI
 
-[ -d ./backups ] || mkdir ./backups
+[ -d /storage/backups ] || mkdir /storage/backups
 
 #create the list of files to backup
-echo "./docker-compose.yml" >list.txt
-echo "./services/" >>list.txt
-echo "./config/" >>list.txt
+echo "/storage/docker-compose.yml" >list.txt
+echo "/storage/services/" >>list.txt
+echo "/storage/config/" >>list.txt
 
 #setup variables
-logfile=./backups/log_local.txt
+logfile=/storage/backups/log_local.txt
 backupfile="backup-$(date +"%Y-%m-%d_%H%M").tar.gz"
 
 #compress the backups folders to archive
 echo "compressing folders"
 sudo tar -czf \
-	./backups/$backupfile \
+	/storage/backups/$backupfile \
 	-T list.txt
 
 rm list.txt
 
 #set permission for backup files
-sudo chown pi:pi ./backups/backup*
+sudo chown pi:pi /storage/backups/backup*
 
 #create local logfile and append the latest backup file to it
-echo "backup saved to ./backups/$backupfile"
+echo "backup saved to /storage/backups/$backupfile"
 sudo touch $logfile
 sudo chown pi:pi $logfile
 echo $backupfile >>$logfile
 
 #show size of archive file
-du -h ./backups/$backupfile
+du -h /storage/backups/$backupfile
 
 #remove older local backup files
 #to change backups retained,  change below +5 to whatever you want (days retained +1)
-ls -t1 ./backups/backup* | tail -n +5 | sudo xargs rm -f
+ls -t1 /storage/backups/backup* | tail -n +5 | sudo xargs rm -f
 echo "recent four local backup files are saved in ~/SPI/backups"
 
 
 
 #cloud related - dropbox
-if [ -f ./backups/dropbox ]; then
+if [ -f /storage/backups/dropbox ]; then
 
 	#setup variables
 	dropboxfolder=/SPIBU
 	dropboxuploader=~/Dropbox-Uploader/dropbox_uploader.sh
-	dropboxlog=./backups/log_dropbox.txt
+	dropboxlog=/storage/backups/log_dropbox.txt
 
 	#upload new backup to dropbox
 	echo "uploading to dropbox"
-	$dropboxuploader upload ./backups/$backupfile $backupfile
+	$dropboxuploader upload /storage/backups/$backupfile $backupfile
 
 	#list older files to be deleted from cloud (exludes last 7)
 	#to change dropbox backups retained, change below -4 to whatever you want
@@ -80,11 +80,11 @@ fi
 
 
 #cloud related - google drive
-if [ -f ./backups/rclone ]; then
+if [ -f /storage/backups/rclone ]; then
 	echo "synching to Google Drive"
 	echo "latest 4 backup files are kept"
 	#sync local backups to gdrive (older gdrive copies will be deleted)
-	rclone sync -P ./backups --include "/backup*"  gdrive:/SPIBU/
+	rclone sync -P /storage/backups --include "/backup*"  gdrive:/SPIBU/
 	echo "synch with Google Drive complete"
 fi
 

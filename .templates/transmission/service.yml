@@ -9,9 +9,9 @@ transmission:
   #      - USER=username #optional
   #      - PASS=password #optional
   volumes:
-    - ./config/transmission:/config
-    - ./downloads:/downloads
-    - ./downloads/TransmissionWathFolder:/watch
+    - /storage/config/transmission:/config
+    - /storage/downloads:/downloads
+    - /storage/downloads/TransmissionWathFolder:/watch
   ports:
     - 9091:9091
     - 51413:51413

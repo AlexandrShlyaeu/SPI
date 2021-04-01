@@ -9,10 +9,10 @@ plex:
     - UMASK_SET=022 #optional
     # - PLEX_CLAIM= #optional
   volumes:
-    - ./config/plex:/config
-    - ./media/tvshows:/tv
-    - ./media/photo:/photo
-    - ./media/audiobooks:/audiobooks
-    - ./media/learn:/learn
-    - ./media/music:/music
+    - /storage/config/plex:/config
+    - /storage/media/tvshows:/tv
+    - /storage/media/photo:/photo
+    - /storage/media/audiobooks:/audiobooks
+    - /storage/media/learn:/learn
+    - /storage/media/music:/music
   restart: unless-stopped

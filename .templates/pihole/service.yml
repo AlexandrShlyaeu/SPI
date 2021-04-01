@@ -9,10 +9,10 @@ pihole:
     - "8089:80/tcp"
     #- "443:443/tcp"
   env_file:
-    - ./services/pihole/pihole.env
+    - /storage/services/pihole/pihole.env
   volumes:
-    - ./config/pihole/etc-pihole/:/etc/pihole/
-    - ./config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/
+    - /storage/config/pihole/etc-pihole/:/etc/pihole/
+    - /storage/config/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/
   dns:
     - 127.0.0.1
     - 1.1.1.1

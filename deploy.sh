@@ -76,16 +76,16 @@ timezones() {
 # This function creates the volumes, services and backup directories.
 # It then assisgns the current user to the ACL to give full read write access
 docker_setfacl() {
-	[ -d ./services ] || mkdir ./services
-	[ -d ./config ] || mkdir ./config
-	[ -d ./SPIBackups ] || mkdir ./SPIBackups
+	[ -d /storage/services ] || mkdir /storage/services
+	[ -d /storage/config ] || mkdir /storage/config
+	[ -d /storage/SPIBackups ] || mkdir /storage/SPIBackups
 
 
 	#give current user rwx on the volumes and backups
-	[ $(getfacl ./config | grep -c "default:user:$USER") -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx ./config
-	[ $(getfacl ./SPIBackups | grep -c "default:user:$USER") -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx ./SPIBackups
+	[ $(getfacl /storage/config | grep -c "default:user:$USER") -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx /storage/config
+	[ $(getfacl /storage/SPIBackups | grep -c "default:user:$USER") -eq 0 ] && sudo setfacl -Rdm u:$USER:rwx /storage/SPIBackups
 
-	cat << EOF | sudo tee -a ./config/npm-config.json
+	cat << EOF | sudo tee -a /storage/config/npm-config.json
 {
   "database": {
     "engine": "mysql",
@@ -121,9 +121,9 @@ function yml_builder() {
 
 	service="services/$1/service.yml"
 
-	[ -d ./services/ ] || mkdir ./services/
+	[ -d /storage/services/ ] || mkdir /storage/services/
 
-		if [ -d ./services/$1 ]; then
+		if [ -d /storage/services/$1 ]; then
 			#directory already exists prompt user to overwrite
 			sevice_overwrite=$(whiptail --radiolist --title "Deployment Option" --notags \
 				"$1 was already created before, use [SPACEBAR] to select redeployment configuation" 20 78 12 \
@@ -149,34 +149,34 @@ function yml_builder() {
 			esac
 
 		else
-			mkdir ./services/$1
+			mkdir /storage/services/$1
 			echo "...pulled full $1 from template"
 			rsync -a -q .templates/$1/ services/$1/ --exclude 'build.sh'
 		fi
 
 
 	#if an env file exists check for timezone
-	[ -f "./services/$1/$1.env" ] && timezones ./services/$1/$1.env
+	[ -f "/storage/services/$1/$1.env" ] && timezones /storage/services/$1/$1.env
 
 	#add new line then append service
 	echo "" >>docker-compose.yml
 	cat $service >>docker-compose.yml
 
 	#test for post build
-	if [ -f ./.templates/$1/build.sh ]; then
-		chmod +x ./.templates/$1/build.sh
-		bash ./.templates/$1/build.sh
+	if [ -f /storage/.templates/$1/build.sh ]; then
+		chmod +x /storage/.templates/$1/build.sh
+		bash /storage/.templates/$1/build.sh
 	fi
 
 	#test for directoryfix.sh
-	if [ -f ./.templates/$1/directoryfix.sh ]; then
-		chmod +x ./.templates/$1/directoryfix.sh
+	if [ -f /storage/.templates/$1/directoryfix.sh ]; then
+		chmod +x /storage/.templates/$1/directoryfix.sh
 		echo "...Running directoryfix.sh on $1"
-		bash ./.templates/$1/directoryfix.sh
+		bash /storage/.templates/$1/directoryfix.sh
 	fi
 
 	#make sure terminal.sh is executable
-	[ -f ./services/$1/terminal.sh ] && chmod +x ./services/$1/terminal.sh
+	[ -f /storage/services/$1/terminal.sh ] && chmod +x /storage/services/$1/terminal.sh
 
 }
 
@@ -265,8 +265,8 @@ case $mainmenu_selection in
 		entry_options+=("${cont_array[$index]}")
 
 		#check selection
-		if [ -f ./services/selection.txt ]; then
-			[ $(grep "$index" ./services/selection.txt) ] && entry_options+=("ON") || entry_options+=("OFF")
+		if [ -f /storage/services/selection.txt ]; then
+			[ $(grep "$index" /storage/services/selection.txt) ] && entry_options+=("ON") || entry_options+=("OFF")
 		else
 			entry_options+=("OFF")
 		fi
@@ -287,21 +287,21 @@ case $mainmenu_selection in
 		#docker_setfacl
 
 		# store last sellection
-		[ -f ./services/selection.txt ] && rm ./services/selection.txt
+		[ -f /storage/services/selection.txt ] && rm /storage/services/selection.txt
 		#first run service directory wont exist
-		[ -d ./services ] || mkdir services
-		touch ./services/selection.txt
+		[ -d /storage/services ] || mkdir services
+		touch /storage/services/selection.txt
 		#Run yml_builder of all selected containers
 		for container in "${containers[@]}"; do
 			echo "Adding $container container"
 			yml_builder "$container"
-			echo "$container" >>./services/selection.txt
+			echo "$container" >>/storage/services/selection.txt
 		done
 
 		# add custom containers
-		if [ -f ./services/custom.txt ]; then
+		if [ -f /storage/services/custom.txt ]; then
 			if (whiptail --title "Custom Container detected" --yesno "custom.txt has been detected do you want to add these containers to the stack?" 20 78); then
-				mapfile -t containers <<<$(cat ./services/custom.txt)
+				mapfile -t containers <<<$(cat /storage/services/custom.txt)
 				for container in "${containers[@]}"; do
 					echo "Adding $container container"
 					yml_builder "$container"
@@ -335,13 +335,13 @@ case $mainmenu_selection in
 	)
 
 	case $docker_selection in
-	"start") ./scripts/start.sh ;;
-	"stop") ./scripts/stop.sh ;;
-	"stop_all") ./scripts/stop-all.sh ;;
-	"restart") ./scripts/restart.sh ;;
-	"pull") ./scripts/update.sh ;;
-	"prune_volumes") ./scripts/prune-volumes.sh ;;
-	"prune_images") ./scripts/prune-images.sh ;;
+	"start") /storage/scripts/start.sh ;;
+	"stop") /storage/scripts/stop.sh ;;
+	"stop_all") /storage/scripts/stop-all.sh ;;
+	"restart") /storage/scripts/restart.sh ;;
+	"pull") /storage/scripts/update.sh ;;
+	"prune_volumes") /storage/scripts/prune-volumes.sh ;;
+	"prune_images") /storage/scripts/prune-images.sh ;;
 	"aliases")
 		touch ~/.bash_aliases
 		if [ $(grep -c 'SPI' ~/.bash_aliases) -eq 0 ]; then
@@ -389,8 +389,8 @@ case $mainmenu_selection in
 	fi
 		;;
 
-	"rclone_backup") ./scripts/rclone_backup.sh ;;
-	"rclone_restore") ./scripts/rclone_restore.sh ;;
+	"rclone_backup") /storage/scripts/rclone_backup.sh ;;
+	"rclone_restore") /storage/scripts/rclone_restore.sh ;;
 
 	esac
 	;;
@@ -431,7 +431,7 @@ case $mainmenu_selection in
 		if [ ! -d ~/log2ram ]; then
 			git clone https://github.com/azlux/log2ram.git ~/log2ram
 			chmod +x ~/log2ram/install.sh
-			pushd ~/log2ram && sudo ./install.sh
+			pushd ~/log2ram && sudo /storage/install.sh
 			popd
 		else
 			echo "log2ram already installed"

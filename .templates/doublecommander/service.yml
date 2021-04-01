@@ -9,10 +9,10 @@ doublecommander:
     - UMASK_SET=022 #optional
     - DELUGE_LOGLEVEL=error #optional
   volumes:
-    - ./config/doublecommander:/config
-    - ./config:/configs
-    - ./downloads:/downloads
-    - ./media:/media
+    - /storage/config/doublecommander:/config
+    - /storage/config:/configs
+    - /storage/downloads:/downloads
+    - /storage/media:/media
   ports:
     - 8112:8112
     - 58846:58846

@@ -7,8 +7,8 @@ tvheadend:
     - TZ=Europe/Minsk
     #- RUN_OPTS=<run options here> #optional
   volumes:
-    - ./config/tvheadend:/config
-    - ./media/TVrecordings:/recordings
+    - /storage/config/tvheadend:/config
+    - /storage/media/TVrecordings:/recordings
   ports:
     - 9981:9981
     - 9982:9982

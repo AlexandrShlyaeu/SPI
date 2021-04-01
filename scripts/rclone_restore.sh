@@ -8,7 +8,7 @@
 		sudo chown pi:pi ~/SPI/SPIBackups
 
 		# resync from gdrive to ~/SPI/SPIBackups
-		rclone sync -P gdrive:/SPIBackups/ --include "/SPIbackup*" ./SPIBackups > ./SPIBackups/rclone_sync_log
+		rclone sync -P gdrive:/SPIBackups/ --include "/SPIbackup*" /storage/SPIBackups > /storage/SPIBackups/rclone_sync_log
 
 		# no check if online - mayve some another time just assume it is online
 		echo -e "\e[32m=====================================================================================\e[0m"

@@ -7,9 +7,9 @@ bazarr:
     - TZ=Europe/Minsk
     - UMASK_SET=022 #optional
   volumes:
-    - ./config/bazarr:/config
-    - ./media/movies:/movies
-    - ./media/tvshows:/tv
+    - /storage/config/bazarr:/config
+    - /storage/media/movies:/movies
+    - /storage/media/tvshows:/tv
   ports:
     - 6767:6767
   restart: unless-stopped
