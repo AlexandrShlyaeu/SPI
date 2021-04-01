@@ -56,7 +56,7 @@ Static IP address is not absolutely necessary just to try the project and find o
 - Enter the directory and run:
 
 <pre><code>cd ~/SPI</code></pre>
-<pre><code>/storage/deploy.sh</code></pre>
+<pre><code>./deploy.sh</code></pre>
 
 ## Menu
 
@@ -77,7 +77,3 @@ Static IP address is not absolutely necessary just to try the project and find o
 ### Miscellaneous commands
 
 <p>There are three scripts that can be used in case you would like to disable swapping to your SD card. You might want to do it in order to extend life of your SD card. SD cards were not designed for intensive IO tasks, therefore using them like normal HDDs is not ideal. Swap file is used to offload your RAM in case of OS need to dump it somewhere. Swap will be quite often modify, what might wear out your SD card in a long run. In other hand if your OS is swapping a lot of data it means his RAM size is generally to small - this might be a case on RPi3 where we have only 1GB of RAM.</p>
-
-### Update SPI Stack
-
-<p>Each time you run <code>/storage/deploy.sh</code> script will check GitHub repository for any updates and download them if available. You can also manually check for update using this option without running <code>/storage/deploy.sh</code> script. Updates will not modify your configuration or any private files except the ones that are part of the SPI logic. Some new functions might be added or new containers etc.</p>
